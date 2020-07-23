@@ -21,7 +21,7 @@ export function postsFetched(morePosts) {
 export async function fetchNext5Posts(dispatch, getState) {
     dispatch(startLoading());
 
-    const offset = getState().feed.posts.length;
+    const offset = getState().feed.posts.length; //needs to know how many posts we have
     //with offset updating dynamically the number of posts being displayed: 
     const res = await axios.get(`${API_URL}/posts?offset=${offset}&limit=5`);
 
