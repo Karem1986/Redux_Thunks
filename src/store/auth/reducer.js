@@ -12,6 +12,13 @@ export default function authSliceReducer(state = initialState, action) {
                 token: action.payload
             };
         }
+        //SIGNUP 
+        case "SIGNUP_SUCCESS":
+            return {
+                ...state,
+                jwt: action.payload
+            };
+        //LOGIN:
         case "PROFILE": {
             return {
                 ...state,

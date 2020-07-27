@@ -1,10 +1,47 @@
 // A thunk creator for user login 
-
-import { Route } from "react-router-dom";
 import axios from "axios"
 const API_URL = `https://codaisseur-coders-network.herokuapp.com`;
 
-///for login and passed in the tunk below
+//SIGNUP
+const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
+
+//Action creator for sign up:
+function signupSuccess(token) {
+    return {
+        type: SIGNUP_SUCCESS,
+        payload: token,
+    };
+}
+
+//thunk to send a request for signup to the backend:
+export function signUp(name, email, password) {
+    return async function (dispatch, getState) {
+        console.log("Inside Thunk", email, password, name)
+        try {
+            const response = await axios.post(`${API_URL}/signup`,
+
+                {
+                    name: name,
+                    email: email,
+                    password: password
+
+                })
+
+            console.log('testing response', response.data.jwt)
+
+            const token = response.data.jwt
+            const action = signupSuccess(token)
+            console.log('testing action token', action)
+            dispatch(action);
+
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+}
+
+///Login and passed in the tunk below
 function loginUser(token) { //this will actually give the login 
     return {
         type: "AUTH", //need a case in the reducer
@@ -27,10 +64,7 @@ function setItem(key, value) { //this will actually give the login
         payload: key, value
     }
 }
-
-
 ///THUNKS START HERE:
-
 //auth on the client side- COPY THE WHOLE THING FOR OTHER LOGINS
 export function login(email, password) {
     // this thunk dispatch the action on line 29 

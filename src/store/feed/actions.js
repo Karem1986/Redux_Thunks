@@ -4,12 +4,14 @@ import axios from "axios";
 
 const API_URL = `https://codaisseur-coders-network.herokuapp.com`;
 
-
+//action creator to load posts 
 export function startLoading() {
     return {
         type: "feed/startLoading"
     };
 }
+
+//action creator to load more posts 
 export function postsFetched(morePosts) {
     return {
         type: "feed/postsFetched",

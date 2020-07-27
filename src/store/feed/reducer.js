@@ -14,7 +14,7 @@ export default function feedSliceReducer(state = initialState, action) {
 
         case "feed/postsFetched": {
             return {
-                loading: false, //because the posts are fetched 
+                loading: false, //because the posts are fetched already
                 posts: [...state.posts, ...action.payload]
             }
         }
